@@ -179,9 +179,7 @@
             transition: all 0.2s ease;
             margin-top: 15px;
         }
-        .unlock-btn:active {
-            transform: scale(0.95);
-        }
+        .unlock-btn:active { transform: scale(0.95); }
 
         /* --- SCREEN 4: VIDEO SCREEN --- */
         #video-screen {
@@ -246,6 +244,12 @@
 </head>
 <body>
 
+    <!-- 🎵 BACKGROUND MUSIC AUDIO ELEMENT -->
+    <!-- Palitan mo ang 'music.mp3' ng tamang file name ng kanta mo -->
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- 📊 HEART COUNTER -->
     <div id="counter-container">
         Mga Napindot: <span id="heart-count">0</span> / 50 💖
@@ -288,7 +292,7 @@
         </div>
     </div>
 
-    <!-- SCREEN 3: ANG POPUP INTERMEDIATE SCREEN (Para payagan ng browser ang audio/video autoplay) -->
+    <!-- SCREEN 3: ANG POPUP INTERMEDIATE SCREEN -->
     <div id="unlock-screen">
         <h2 style="color: #ff4d6d; margin-top: 0;">🎉 Quest Complete! 🎉</h2>
         <p style="color: #555; font-size: 1.1rem; line-height: 1.5;">Nakuha mo ang lahat ng 50 puso! May nahanap kang nakatagong regalo... 🎁</p>
@@ -301,7 +305,7 @@
             <h1 style="color: #ff4d6d; margin-top: 0; font-size: 1.6rem;">Para sa Paborito ko... 💕</h1>
             
             <div class="video-wrapper">
-                <!-- PAALALA: Palitan ang URL dito ng direct link ng video mo (.mp4 format pinakamaganda) -->
+                <!-- PAALALA: Palitan ang greeting.mp4 ng pangalan ng video mo sa GitHub -->
                 <video id="myLoveVideo" controls playsinline>
                     <source src="greeting.mp4" type="video/mp4">
                     Hindi suportado ng browser mo ang video tag.
@@ -339,6 +343,11 @@
         function openSurprise() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             
+            // 🎵 MAGLALARO ANG BACKGROUND MUSIC DITO
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.4; // Naka-set sa 40% ang lakas para marinig pa rin ang pop sound
+            music.play().catch(e => console.log("Music play blocked", e));
+
             document.getElementById('box-screen').style.display = 'none';
             document.getElementById('surprise-screen').style.display = 'block';
             document.getElementById('counter-container').style.display = 'block';
@@ -401,25 +410,27 @@
             setTimeout(() => { pop.remove(); }, 800);
         }
 
-        // Ipakita ang "Buksan ang regalo" popup pagkatapos maka-50
         function triggerUnlockPopup() {
             clearInterval(heartInterval); 
             
             document.getElementById('surprise-screen').style.display = 'none';
             document.getElementById('counter-container').style.display = 'none';
-            document.getElementById('unlock-screen').style.display = 'block'; // Papasok ang popup screen
+            document.getElementById('unlock-screen').style.display = 'block'; 
             
             const remainingHearts = document.querySelectorAll('.heart');
             remainingHearts.forEach(h => h.remove());
         }
 
-        // Dito natin ise-secure ang autoplay. Pagka-click sa button, mag-play agad ang video!
         function playVideoSurprise() {
+            // 🎵 ITIGIL ANG BACKGROUND MUSIC BAGO MAG-PLAY ANG VIDEO GREETING
+            const music = document.getElementById('bgMusic');
+            music.pause();
+
             document.getElementById('unlock-screen').style.display = 'none';
             document.getElementById('video-screen').style.display = 'block';
             
             const video = document.getElementById('myLoveVideo');
-            video.play(); // Gagana ito nang walang bawas sa tunog dahil galing sa pinindot na button!
+            video.play(); 
         }
     </script>
 
