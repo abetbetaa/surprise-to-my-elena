@@ -122,7 +122,7 @@
             font-size: 1.05rem;
         }
 
-        /* --- SLIDESHOW STYLES --- */
+        /* --- SLIDESHOW STYLES (AUTOMATIC WITH FADE) --- */
         .slideshow-container {
             position: relative;
             max-width: 100%;
@@ -136,43 +136,30 @@
             display: none;
             width: 100%;
             height: 100%;
+            animation: fadeEffect 1s;
+        }
+        @keyframes fadeEffect {
+            from { opacity: 0.4; } 
+            to { opacity: 1; }
         }
         .mySlides img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            margin-top: -22px;
-            padding: 10px 15px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 15;
-        }
-        .prev { left: 0; border-radius: 3px 0 0 3px; }
-        .next { right: 0; border-radius: 3px 0 0 3px; }
-        .prev:hover, .next:hover { background-color: rgba(214, 51, 132, 0.8); }
         .dot-container { text-align: center; margin-bottom: 15px; }
         .dot {
-            cursor: pointer;
             height: 10px;
             width: 10px;
-            margin: 0 2px;
+            margin: 0 4px;
             background-color: #bbb;
             border-radius: 50%;
             display: inline-block;
             transition: background-color 0.6s ease;
         }
-        .active, .dot:hover { background-color: #d63384; }
+        .active { background-color: #d63384; }
 
-        /* --- ✉️ SOBRE NA MAY PAKPAK (FLYING ENVELOPE WITH WINGS) --- */
+        /* --- ✉️ SOBRE NA MAY PAKPAK --- */
         .flying-envelope {
             position: fixed;
             font-size: 40px;
@@ -185,8 +172,6 @@
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
             display: inline-block;
         }
-
-        /* Kaliwang Pakpak */
         .flying-envelope::before {
             content: "🪶";
             position: absolute;
@@ -196,8 +181,6 @@
             transform-origin: right bottom;
             animation: flapLeft 0.3s ease-in-out infinite alternate;
         }
-
-        /* Kanang Pakpak */
         .flying-envelope::after {
             content: "🪶";
             position: absolute;
@@ -208,8 +191,6 @@
             transform-origin: left bottom;
             animation: flapRight 0.3s ease-in-out infinite alternate;
         }
-
-        /* Animations para sa pagkampay ng pakpak */
         @keyframes flapLeft {
             0% { transform: rotate(-20deg); }
             100% { transform: rotate(30deg); }
@@ -218,15 +199,13 @@
             0% { transform: scaleX(-1) rotate(-20deg); }
             100% { transform: scaleX(-1) rotate(30deg); }
         }
-
-        /* Animation para sa paglipad pataas */
         @keyframes flyUp {
             0% { transform: translateY(0) translateX(0) rotate(-5deg); opacity: 0.9; }
             50% { transform: translateY(-50vh) translateX(40px) rotate(5deg); }
             100% { transform: translateY(-120vh) translateX(-10px) rotate(-5deg); opacity: 0; }
         }
 
-        /* --- 📜 POPUP SECRET MESSAGE FROM ENVELOPE --- */
+        /* --- 📜 POPUP SECRET MESSAGE --- */
         #secret-popup {
             display: none;
             position: fixed;
@@ -258,7 +237,6 @@
             font-weight: bold;
             margin-top: 15px;
         }
-
         #popup-overlay {
             display: none;
             position: fixed;
@@ -267,7 +245,7 @@
             z-index: 290;
         }
 
-        /* --- SCREEN 3: POPUP KAPAG NAKA-50 HEARTS --- */
+        /* --- SCREEN 3: QUEST COMPLETE POPUP --- */
         #unlock-screen {
             display: none;
             text-align: center;
@@ -363,7 +341,7 @@
 </head>
 <body>
 
-    <!-- 🎵 BACKGROUND MUSIC AUDIO ELEMENT -->
+    <!-- 🎵 BACKGROUND MUSIC -->
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
@@ -388,16 +366,14 @@
                 <div class="mySlides"><img src="https://scontent.fmnl3-4.fna.fbcdn.net/v/t39.30808-6/605692887_2287965191710144_2505694390836038961_n.jpg?stp=dst-jpg_tt6&cstp=mx1296x1728&ctp=s1296x1728&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGS2g-Al1FbBHNdwXyF39XY2L3c9Rw-fjPYvdz1HD5-M6z6I0Sv6uW2xRKJGE1WvY9YmoDY6m9hxc-gW-UYlz1d&_nc_ohc=TOi1fpvUtkwQ7kNvwHyWbry&_nc_oc=AdqYRI3uplA7eEqBk2MlS4wFxQEqkSIo1c41f1_Bh9kpMCggYHcf45iolFjQIx9T2zc&_nc_zt=23&_nc_ht=scontent.fmnl3-4.fna&_nc_gid=ootQyjprjtLKe5hQw9VRjg&_nc_ss=7b2a8&oh=00_AQBmeUcwuEFvnbENRXijH20wD64ds5OiNr07ctyur4OCnA&oe=6A5FC986" alt="Tayo 3"></div>
                 <div class="mySlides"><img src="https://scontent.fmnl37-1.fna.fbcdn.net/v/t39.30808-6/500073879_2093829281123737_8164147672547399528_n.jpg?stp=dst-jpg_tt6&cstp=mx736x1000&ctp=s736x1000&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHIAzEFu5qfFa9MXhjLshnV0A-pfNTWtqvQD6l81Na2q3wbHXeNUM0KIOu4joOd8CskcfD_H5irjvk2Z3gYdY0N&_nc_ohc=y7VPX1VHUU4Q7kNvwHk7bSY&_nc_oc=AdrBocLHjAkl_1e1vPaxljjbRFhD5iCh4nQSAibSlBaPzZEnURmWTQAYLMR4hzg6ASY&_nc_zt=23&_nc_ht=scontent.fmnl37-1.fna&_nc_gid=bYJcUrj80Y1RJYdrS0t8Kw&_nc_ss=7b2a8&oh=00_AQD_IOPeeW-IzXcAneFnB0kn2QcJ1bnHKVkQOks_ugHeEA&oe=6A5FF415" alt="Tayo 4"></div>
                 <div class="mySlides"><img src="https://scontent.fmnl3-3.fna.fbcdn.net/v/t39.30808-6/492560974_2069673523539313_613949877520675021_n.jpg?stp=dst-jpg_tt6&cstp=mx1518x2048&ctp=s1518x2048&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHRLNMs4pHuVS8A_HG0o2wcbBzb6-EAS3lsHNvr4QBLeZE5RwPunMtDgUbdOcvd4io3rRqQ6cdlWN3JV8ZsfxXe&_nc_ohc=uHTEHjtTUfAQ7kNvwEcbtX6&_nc_oc=Adr5K_ANcvrGi6QL7_98sk_zR66VEybEFnfzgmTp06wE8ZIpI8XCW7yLds-N12s1Axg&_nc_zt=23&_nc_ht=scontent.fmnl3-3.fna&_nc_gid=ePtWRTN85kNwHDXV-t90cw&_nc_ss=7b2a8&oh=00_AQAFA_PenIUkC6iWgB5blQs-NY78jPQyWlO1rMYvnj32iQ&oe=6A5FE478" alt="Tayo 5"></div>
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
 
             <div class="dot-container">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-                <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
             
             <h1>Happy Monthsary, Love! ❤️</h1>
@@ -444,12 +420,13 @@
     </div>
 
     <script>
-        let slideIndex = 1;
+        let slideIndex = 0;
         let heartCount = 0; 
         const targetHearts = 50; 
         let audioCtx;
         let heartInterval;
         let envelopeInterval; 
+        let slideshowTimeout;
 
         function playPopSound() {
             try {
@@ -468,27 +445,23 @@
             } catch (e) { console.log("Audio play blocked", e); }
         }
 
-        // --- ✨ FUNCTION PARA SA SPARKLE EFFECT SA BOX ---
         function createSparkles(e) {
             const colors = ['#ffe100', '#ff4d6d', '#ffb6c1', '#ffffff', '#ff00a0'];
-            const sparkleCount = 40; // Dami ng sparkles na sasabog
+            const sparkleCount = 40;
 
             for (let i = 0; i < sparkleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('sparkle-particle');
                 
-                // Random na hugis (bituin o bilog)
                 const isStar = Math.random() > 0.5;
                 particle.innerHTML = isStar ? '✨' : '🌸';
                 particle.style.fontSize = Math.random() * 15 + 15 + 'px';
                 
-                // I-center sa pinindot na box
                 particle.style.left = e.clientX + 'px';
                 particle.style.top = e.clientY + 'px';
                 
-                // Random na direksyon ng pagsabog (X at Y coordinates)
                 const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 150 + 50; // Gaano kalayo ang talsik
+                const distance = Math.random() * 150 + 50; 
                 const mx = Math.cos(angle) * distance + 'px';
                 const my = Math.sin(angle) * distance + 'px';
                 
@@ -497,10 +470,7 @@
                 
                 document.body.appendChild(particle);
                 
-                // Alisin ang elemento pagkatapos ng animation
-                setTimeout(() => {
-                    particle.remove();
-                }, 800);
+                setTimeout(() => { particle.remove(); }, 800);
             }
         }
 
@@ -511,30 +481,38 @@
             music.volume = 0.4; 
             music.play().catch(e => console.log("Music play blocked", e));
 
-            // Binigyan natin ng maikling delay (400ms) para makita muna ang ganda ng sparkles bago mag-fade out ang screen
             setTimeout(() => {
                 document.getElementById('box-screen').style.display = 'none';
                 document.getElementById('surprise-screen').style.display = 'block';
                 document.getElementById('counter-container').style.display = 'block';
 
-                showSlides(slideIndex);
+                showSlides(); // Start ng automatic slideshow
                 heartInterval = setInterval(createHeart, 300); 
                 envelopeInterval = setInterval(createFlyingEnvelope, 5000); 
             }, 400);
         }
 
-        function plusSlides(n) { showSlides(slideIndex += n); }
-        function currentSlide(n) { showSlides(slideIndex = n); }
-        function showSlides(n) {
+        // --- 📸 AUTOMATIC SLIDESHOW LOGIC ---
+        function showSlides() {
             let i;
             let slides = document.getElementsByClassName("mySlides");
             let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {slideIndex = 1}    
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-            for (i = 0; i < dots.length; i++) { dots[i].className = dots[i].className.replace(" active", ""); }
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }    
+            
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
             slides[slideIndex-1].style.display = "block";  
             dots[slideIndex-1].className += " active";
+            
+            // Magpapalit kusa kada 3 segundo (3000 milliseconds)
+            slideshowTimeout = setTimeout(showSlides, 3000); 
         }
 
         function createHeart() {
@@ -615,6 +593,7 @@
         function triggerUnlockPopup() {
             clearInterval(heartInterval); 
             clearInterval(envelopeInterval); 
+            clearTimeout(slideshowTimeout); // Ititigil ang slideshow kapag tapos na ang game
             
             document.getElementById('surprise-screen').style.display = 'none';
             document.getElementById('counter-container').style.display = 'none';
