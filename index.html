@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para sa Paborito Kong Tao ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffeef2;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Screen 1: Ang Regalo */
+        #box-screen {
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+        .gift-box {
+            font-size: 100px;
+            cursor: pointer;
+            display: inline-block;
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .click-text {
+            color: #d63384;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        /* Screen 2: Ang Liham at Regalo */
+        #surprise-screen {
+            display: none;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .love-letter {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
+            border: 2px solid #ffb6c1;
+            position: relative;
+            z-index: 10; /* Para nasa ibabaw ng bumabagsak na puso ang letter */
+        }
+        .love-letter h1 {
+            color: #d63384;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        .love-letter p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* Lalagyan ng picture ninyo */
+        .couple-img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 3px solid #ffc0cb;
+        }
+
+        /* Heart Rain Animation */
+        .heart {
+            position: fixed;
+            color: #ff4d6d;
+            font-size: 20px;
+            top: -20px;
+            z-index: 5;
+            cursor: pointer;
+            animation: fall linear forwards;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) translateX(50px) rotate(360deg);
+            }
+        }
+
+        /* Popup Text kapag pinindot ang puso */
+        .love-pop {
+            position: fixed;
+            color: #d63384;
+            font-weight: bold;
+            font-size: 1.2rem;
+            pointer-events: none; /* Para hindi harangan ang clicks */
+            z-index: 999;
+            animation: floatUp 0.8s ease-out forwards;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-50px) scale(1.3); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN 1: ANG BOX -->
+    <div id="box-screen">
+        <div class="gift-box" onclick="openSurprise()">🎁</div>
+        <div class="click-text">May regalo ako sa'yo, paki-click mo naman! 👉👈</div>
+    </div>
+
+    <!-- SCREEN 2: ANG NAKATAGONG SURPRISE -->
+    <div id="surprise-screen">
+        <div class="love-letter">
+            <img class="couple-img" src="https://scontent.fmnl3-1.fna.fbcdn.net/v/t39.30808-6/654796371_2354524058387590_652005246445264917_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG8LMR7AwDeKSsfG2_45GcDQJAfr7Sm-2RAkB-vtKb7ZGnXOdwmSakNQHx3T5TMoQfjCYk7cAestRwzc2AiLgfk&_nc_ohc=v1gE-x8qu9kQ7kNvwHCq4Ag&_nc_oc=AdrhmRqfJB98BV4cvGjkW-jgHXTMGs4Ibno3-6RBanU_3ZI12eeAfneMUCFXE4LwezA&_nc_zt=23&_nc_ht=scontent.fmnl3-1.fna&_nc_gid=7DOqh7I8FlHZrid7qeFlpg&_nc_ss=7b2a8&oh=00_AQC1LERrlwqJPWQ-Cq2g4kW8S3-ud1cka5_nmfMbgFMOMA&oe=6A5F547B" alt="Tayo">
+            
+            <h1>Happy Monthsary, Love! ❤️</h1>
+            <p>
+                Gusto ko lang ipaalala sa'yo kung gaano ka kahalaga sa akin. Salamat sa pag dala ng saya sa buhay ko at sa pagiging ikaw. 
+            </p>
+            <p>
+                Mahal kita ng sobra, pero sa kabila ng pag mamahal ko sayo, nag mamahal rin ang mga bilihin. ackkk!!. hayaan mo pag pwede ng gawing kanin ang buhangin at gawing ulam ang lupa. papakasal na tayo hahaha joke!
+            </p>
+            <p style="font-size: 0.85rem; color: #aaa; margin-top: 20px;">
+                (Tip: Subukan mong pindutin ang mga bumabagsak na puso! 😉)
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function openSurprise() {
+            document.getElementById('box-screen').style.display = 'none';
+            document.getElementById('surprise-screen').style.display = 'block';
+
+            // Bumabagsak na puso
+            setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = '❤️';
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 20 + 20 + 'px'; // Medyo pinalaki para madaling ma-tap
+            
+            // Kapag pinindot ang puso (gumagana sa click at touch)
+            heart.addEventListener('click', function(e) {
+                popLoveText(e);
+                heart.remove(); // Nawawala ang puso pagkapindot
+            });
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Function para sa lumulutang na text
+        function popLoveText(e) {
+            const sweetTexts = ["I love you! 💖", "Mahal kita! 🥰", "Miss na kita! 🥺", "Ikaw lang; 👑", "Mwaaa! 💋"];
+            // Pumipili ng random na text sa listahan sa itaas
+            const randomText = sweetTexts[Math.floor(Math.random() * sweetTexts.length)];
+
+            const pop = document.createElement('div');
+            pop.classList.add('love-pop');
+            pop.innerText = randomText;
+            
+            // Ilalagay ang text kung saan eksaktong pinindot ng daliri/mouse
+            pop.style.left = e.clientX + 'px';
+            pop.style.top = e.clientY + 'px';
+            
+            document.body.appendChild(pop);
+            
+            setTimeout(() => {
+                pop.remove();
+            }, 800);
+        }
+    </script>
+
+</body>
+</html>
