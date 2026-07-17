@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para sa Paborito Kong Tao ❤️</title>
+    <title>to my elena ❤️</title>
     <style>
         * {
             box-sizing: border-box;
@@ -63,7 +63,7 @@
             box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
             border: 2px solid #ffb6c1;
             position: relative;
-            z-index: 10; /* Ang letter ay nasa z-index 10 */
+            z-index: 10; /* Mas mababa sa mga bumabagsak na puso */
         }
         .love-letter h1 {
             color: #d63384;
@@ -76,23 +76,85 @@
             font-size: 1.05rem;
         }
 
-        /* Lalagyan ng picture ninyo */
-        .couple-img {
-            width: 100%;
-            max-height: 250px;
-            object-fit: cover;
+        /* --- SLIDESHOW STYLES --- */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            height: 250px;
+            margin: 0 auto 20px auto;
+            overflow: hidden;
             border-radius: 15px;
-            margin-bottom: 20px;
             border: 3px solid #ffc0cb;
         }
 
-        /* Bumabagsak na Puso sa HARAPAN (Foregound) */
+        .mySlides {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Mga Pindutan (Prev at Next) */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 10px 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 15; /* Para laging mapindot kahit may puso */
+        }
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(214, 51, 132, 0.8);
+        }
+
+        /* Slide dots indicator sa ilalim ng picture */
+        .dot-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .dot {
+            cursor: pointer;
+            height: 10px;
+            width: 10px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: #d63384;
+        }
+        /* --- END OF SLIDESHOW STYLES --- */
+
+        /* Bumabagsak na Puso sa HARAPAN */
         .heart {
             position: fixed;
             color: #ff4d6d;
             font-size: 20px;
             top: -30px;
-            z-index: 100; /* Ginawang 100 para mas mataas sa .love-letter na may z-index 10 */
+            z-index: 100; /* Lumalabas sa harapan ng liham at pictures */
             cursor: pointer;
             animation: fall linear forwards;
             user-select: none;
@@ -110,8 +172,8 @@
             color: #d63384;
             font-weight: bold;
             font-size: 1.3rem;
-            pointer-events: none; /* Hindi haharang sa susunod na clicks */
-            z-index: 200; /* Pinaka-ibabaw sa lahat */
+            pointer-events: none;
+            z-index: 200;
             animation: floatUp 0.8s ease-out forwards;
             text-shadow: 2px 2px 4px rgba(255,255,255,0.9);
         }
@@ -132,7 +194,47 @@
     <!-- SCREEN 2: ANG NAKATAGONG SURPRISE -->
     <div id="surprise-screen">
         <div class="love-letter">
-            <img class="couple-img" src="https://scontent.fmnl3-1.fna.fbcdn.net/v/t39.30808-6/654796371_2354524058387590_652005246445264917_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG8LMR7AwDeKSsfG2_45GcDQJAfr7Sm-2RAkB-vtKb7ZGnXOdwmSakNQHx3T5TMoQfjCYk7cAestRwzc2AiLgfk&_nc_ohc=v1gE-x8qu9kQ7kNvwHCq4Ag&_nc_oc=AdrhmRqfJB98BV4cvGjkW-jgHXTMGs4Ibno3-6RBanU_3ZI12eeAfneMUCFXE4LwezA&_nc_zt=23&_nc_ht=scontent.fmnl3-1.fna&_nc_gid=7DOqh7I8FlHZrid7qeFlpg&_nc_ss=7b2a8&oh=00_AQC1LERrlwqJPWQ-Cq2g4kW8S3-ud1cka5_nmfMbgFMOMA&oe=6A5F547B" alt="Tayo">
+            
+            <!-- SLIDESHOW NG MGA LITRATO -->
+            <div class="slideshow-container">
+                <!-- PHOTO 1 (Ito yung una mong nilagay) -->
+                <div class="mySlides">
+                    <img src="https://scontent.fmnl3-1.fna.fbcdn.net/v/t39.30808-6/654796371_2354524058387590_652005246445264917_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG8LMR7AwDeKSsfG2_45GcDQJAfr7Sm-2RAkB-vtKb7ZGnXOdwmSakNQHx3T5TMoQfjCYk7cAestRwzc2AiLgfk&_nc_ohc=v1gE-x8qu9kQ7kNvwHCq4Ag&_nc_oc=AdrhmRqfJB98BV4cvGjkW-jgHXTMGs4Ibno3-6RBanU_3ZI12eeAfneMUCFXE4LwezA&_nc_zt=23&_nc_ht=scontent.fmnl3-1.fna&_nc_gid=7DOqh7I8FlHZrid7qeFlpg&_nc_ss=7b2a8&oh=00_AQC1LERrlwqJPWQ-Cq2g4kW8S3-ud1cka5_nmfMbgFMOMA&oe=6A5F547B" alt="Tayo 1">
+                </div>
+
+                <!-- PHOTO 2 (Palitan mo ang URL sa loob ng src="") -->
+                <div class="mySlides">
+                    <img src="https://scontent.fmnl3-1.fna.fbcdn.net/v/t39.30808-6/615469057_2299310233908973_1150415293070689111_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGADxJ29kcEjItXliACM8To1ab4rpTxiL_VpviulPGIvxa8VSelrTHe3_3yhwhtj9VE6gbwq-M1nVOkrFk2eTuG&_nc_ohc=gOLk5opj-kcQ7kNvwEtLccv&_nc_oc=AdpOq_wEVgFxSKldnTyhlp3buw6htecNfI1qlDk75XZKNgpfh7C_qfnSlvPYMRFzOx0&_nc_zt=23&_nc_ht=scontent.fmnl3-1.fna&_nc_gid=pei9LL0G7e07K_9sxYQiwg&_nc_ss=7b2a8&oh=00_AQDhKkUkJ_0YVREQROb7bj84k8g_sqPDvosqLZpV2m98vA&oe=6A5FF67A" alt="Tayo 2">
+                </div>
+
+                <!-- PHOTO 3 (Palitan mo ang URL sa loob ng src="") -->
+                <div class="mySlides">
+                    <img src="https://scontent.fmnl3-4.fna.fbcdn.net/v/t39.30808-6/605692887_2287965191710144_2505694390836038961_n.jpg?stp=dst-jpg_tt6&cstp=mx1296x1728&ctp=s1296x1728&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGS2g-Al1FbBHNdwXyF39XY2L3c9Rw-fjPYvdz1HD5-M6z6I0Sv6uW2xRKJGE1WvY9YmoDY6m9hxc-gW-UYlz1d&_nc_ohc=TOi1fpvUtkwQ7kNvwHyWbry&_nc_oc=AdqYRI3uplA7eEqBk2MlS4wFxQEqkSIo1c41f1_Bh9kpMCggYHcf45iolFjQIx9T2zc&_nc_zt=23&_nc_ht=scontent.fmnl3-4.fna&_nc_gid=ootQyjprjtLKe5hQw9VRjg&_nc_ss=7b2a8&oh=00_AQBmeUcwuEFvnbENRXijH20wD64ds5OiNr07ctyur4OCnA&oe=6A5FC986" alt="Tayo 3">
+                </div>
+
+                <!-- PHOTO 4 (Palitan mo ang URL sa loob ng src="") -->
+                <div class="mySlides">
+                    <img src="https://scontent.fmnl37-1.fna.fbcdn.net/v/t39.30808-6/500073879_2093829281123737_8164147672547399528_n.jpg?stp=dst-jpg_tt6&cstp=mx736x1000&ctp=s736x1000&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHIAzEFu5qfFa9MXhjLshnV0A-pfNTWtqvQD6l81Na2q3wbHXeNUM0KIOu4joOd8CskcfD_H5irjvk2Z3gYdY0N&_nc_ohc=y7VPX1VHUU4Q7kNvwHk7bSY&_nc_oc=AdrBocLHjAkl_1e1vPaxljjbRFhD5iCh4nQSAibSlBaPzZEnURmWTQAYLMR4hzg6ASY&_nc_zt=23&_nc_ht=scontent.fmnl37-1.fna&_nc_gid=bYJcUrj80Y1RJYdrS0t8Kw&_nc_ss=7b2a8&oh=00_AQD_IOPeeW-IzXcAneFnB0kn2QcJ1bnHKVkQOks_ugHeEA&oe=6A5FF415" alt="Tayo 4">
+                </div>
+
+                <!-- PHOTO 5 (Palitan mo ang URL sa loob ng src="") -->
+                <div class="mySlides">
+                    <img src="https://scontent.fmnl3-3.fna.fbcdn.net/v/t39.30808-6/492560974_2069673523539313_613949877520675021_n.jpg?stp=dst-jpg_tt6&cstp=mx1518x2048&ctp=s1518x2048&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHRLNMs4pHuVS8A_HG0o2wcbBzb6-EAS3lsHNvr4QBLeZE5RwPunMtDgUbdOcvd4io3rRqQ6cdlWN3JV8ZsfxXe&_nc_ohc=uHTEHjtTUfAQ7kNvwEcbtX6&_nc_oc=Adr5K_ANcvrGi6QL7_98sk_zR66VEybEFnfzgmTp06wE8ZIpI8XCW7yLds-N12s1Axg&_nc_zt=23&_nc_ht=scontent.fmnl3-3.fna&_nc_gid=ePtWRTN85kNwHDXV-t90cw&_nc_ss=7b2a8&oh=00_AQAFA_PenIUkC6iWgB5blQs-NY78jPQyWlO1rMYvnj32iQ&oe=6A5FE478" alt="Tayo 5">
+                </div>
+
+                <!-- Buttons para makapag-lipat ng slide -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+
+            <!-- Slide indicator dots -->
+            <div class="dot-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+            </div>
             
             <h1>Happy Monthsary, Love! ❤️</h1>
             <p>
@@ -142,39 +244,70 @@
                 Mahal kita ng sobra, pero sa kabila ng pag mamahal ko sayo, nag mamahal rin ang mga bilihin. ackkk!!. hayaan mo pag pwede ng gawing kanin ang buhangin at gawing ulam ang lupa. papakasal na tayo hahaha joke!
             </p>
             <p style="font-size: 0.85rem; color: #ff8fa3; margin-top: 20px; font-weight: bold;">
-                (Subukan mong tapikin o klikin 'yung mga bumabagsak na puso! 😉)
+                (Tip: Pwede mong i-slide ang mga picture at subukang tapikin ang mga bumabagsak na puso! 😉)
             </p>
         </div>
     </div>
 
     <script>
+        // Simula ng setup ng slideshow
+        let slideIndex = 1;
+
         function openSurprise() {
             document.getElementById('box-screen').style.display = 'none';
             document.getElementById('surprise-screen').style.display = 'block';
+
+            // Ipakita ang unang slide
+            showSlides(slideIndex);
 
             // Simulan ang pagbagsak ng mga puso sa harapan
             setInterval(createHeart, 300);
         }
 
+        // Controls para sa Next at Prev
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Controls gamit ang dots sa ilalim
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+        }
+
+        // Paggawa ng bumabagsak na puso
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerText = '❤️';
             
-            // Random na pwesto, bilis ng animation, at laki ng puso
             heart.style.left = Math.random() * 95 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2.5 + 's'; // 2.5s to 5.5s
-            heart.style.fontSize = Math.random() * 25 + 20 + 'px'; // Medyo pinalaki para madaling ma-touch sa mobile
+            heart.style.animationDuration = Math.random() * 3 + 2.5 + 's';
+            heart.style.fontSize = Math.random() * 25 + 20 + 'px';
             
             // Touch/Click handler para sa puso
             heart.addEventListener('click', function(e) {
                 popLoveText(e);
-                heart.remove(); // Agad mawawala ang puso pagkapindot
+                heart.remove();
             });
             
             document.body.appendChild(heart);
             
-            // Tanggalin ang puso kapag natapos na ang animation pababa
             setTimeout(() => {
                 heart.remove();
             }, 5500);
@@ -188,13 +321,11 @@
             pop.classList.add('love-pop');
             pop.innerText = randomText;
             
-            // Saan eksaktong tinap ang screen, doon lalabas ang text
             pop.style.left = e.clientX + 'px';
             pop.style.top = e.clientY + 'px';
             
             document.body.appendChild(pop);
             
-            // Matanggal ang text pagkatapos ng 0.8s
             setTimeout(() => {
                 pop.remove();
             }, 800);
