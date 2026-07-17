@@ -20,20 +20,26 @@
             overflow-x: hidden;
         }
 
-        /* --- HEART COUNTER STYLES --- */
+        /* --- 📊 HEART COUNTER --- */
         #counter-container {
             display: none;
             position: fixed;
-            top: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.2);
+            top: 20px;
+            background: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.2);
             font-weight: bold;
             color: #d63384;
-            font-size: 1.1rem;
-            z-index: 150; /* Mas mataas sa lahat para laging nakikita */
+            font-size: 1.2rem;
+            z-index: 150;
             border: 2px solid #ffb6c1;
+            text-align: center;
+            animation: pulseCounter 2s infinite;
+        }
+        @keyframes pulseCounter {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         /* Screen 1: Ang Regalo */
@@ -58,7 +64,7 @@
             margin-top: 20px;
         }
 
-        /* Screen 2: Ang Liham at Regalo */
+        /* Screen 2: Ang Liham at Slideshow */
         #surprise-screen {
             display: none;
             text-align: center;
@@ -142,18 +148,49 @@
         }
         .active, .dot:hover { background-color: #d63384; }
 
-        /* --- VIDEO SCREEN STYLES (Locked sa simula) --- */
+        /* --- SCREEN 3: POPUP KAPAG NAKA-50 HEARTS --- */
+        #unlock-screen {
+            display: none;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3);
+            border: 3px solid #ff4d6d;
+            z-index: 200;
+            animation: popScale 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popScale {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .unlock-btn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: all 0.2s ease;
+            margin-top: 15px;
+        }
+        .unlock-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* --- SCREEN 4: VIDEO SCREEN --- */
         #video-screen {
             display: none;
             text-align: center;
             width: 90%;
             max-width: 500px;
             padding: 20px;
-            animation: zoomIn 0.8s ease-in-out;
-        }
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.7); }
-            to { opacity: 1; transform: scale(1); }
+            animation: fadeIn 0.8s ease-in-out;
         }
         .video-card {
             background: white;
@@ -164,20 +201,16 @@
         }
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
+            width: 100%;
             border-radius: 12px;
+            overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             background: #000;
         }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        video {
             width: 100%;
-            height: 100%;
-            border: 0;
+            height: auto;
+            display: block;
         }
 
         /* Bumabagsak na Puso */
@@ -213,9 +246,9 @@
 </head>
 <body>
 
-    <!-- TOP COUNTER: Dito niya makikita kung ilan na ang na-click niya -->
+    <!-- 📊 HEART COUNTER -->
     <div id="counter-container">
-        Hearts Collected: <span id="heart-count">0</span> / 50 ❤️
+        Mga Napindot: <span id="heart-count">0</span> / 50 💖
     </div>
 
     <!-- SCREEN 1: ANG BOX -->
@@ -249,32 +282,40 @@
             <p>Gusto ko lang ipaalala sa'yo kung gaano ka kahalaga sa akin. Salamat sa pag dala ng saya sa buhay ko at sa pagiging ikaw.</p>
             <p>Mahal kita ng sobra, pero sa kabila ng pag mamahal ko sayo, nag mamahal rin ang mga bilihin. ackkk!!. hayaan mo pag pwede ng gawing kanin ang buhangin at gawing ulam ang lupa. papakasal na tayo hahaha joke!</p>
             
-            <!-- In-update natin ang panuto para alam niya ang gagawin -->
             <p style="font-size: 0.95rem; color: #ff4d6d; margin-top: 20px; font-weight: bold; background: #fff0f3; padding: 10px; border-radius: 10px;">
                 🚨 QUEST: Tapikin mo ang 50 bumabagsak na puso para ma-unlock ang pinaka-surprise ko sa'yo! 😉🎉
             </p>
         </div>
     </div>
 
-    <!-- SCREEN 3: ANG NAKALOCK NA VIDEO SCREEN -->
+    <!-- SCREEN 3: ANG POPUP INTERMEDIATE SCREEN (Para payagan ng browser ang audio/video autoplay) -->
+    <div id="unlock-screen">
+        <h2 style="color: #ff4d6d; margin-top: 0;">🎉 Quest Complete! 🎉</h2>
+        <p style="color: #555; font-size: 1.1rem; line-height: 1.5;">Nakuha mo ang lahat ng 50 puso! May nahanap kang nakatagong regalo... 🎁</p>
+        <button class="unlock-btn" onclick="playVideoSurprise()">Buksan ang Regalo! ❤️</button>
+    </div>
+
+    <!-- SCREEN 4: ANG VIDEO SCREEN -->
     <div id="video-screen">
         <div class="video-card">
-            <h1 style="color: #ff4d6d; margin-top: 0; font-size: 1.6rem;">🎉 Quest Complete! 🎉</h1>
-            <p style="color: #666; font-weight: bold;">Heto ang huling regalo ko para sa'yo, Love...</p>
+            <h1 style="color: #ff4d6d; margin-top: 0; font-size: 1.6rem;">Para sa Paborito ko... 💕</h1>
             
             <div class="video-wrapper">
-                <!-- PAALALA: Palitan mo itong YouTube link ng totoong video greeting mo! -->
-                <iframe id="loveVideo" src="https://www.youtube.com/embed/VCWMSbxkmtM?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <!-- PAALALA: Palitan ang URL dito ng direct link ng video mo (.mp4 format pinakamaganda) -->
+                <video id="myLoveVideo" controls playsinline>
+                    <source src="https://www.youtube.com/shorts/VCWMSbxkmtM" type="video/mp4">
+                    Hindi suportado ng browser mo ang video tag.
+                </video>
             </div>
             
-            <p style="color: #ff4d6d; font-weight: bold; margin-top: 15px; font-size: 1.2rem;">I love you to the moon and back! 🌙❤️</p>
+            <p style="color: #ff4d6d; font-weight: bold; margin-top: 15px; font-size: 1.2rem;">I love you so much! 🌙❤️</p>
         </div>
     </div>
 
     <script>
         let slideIndex = 1;
-        let heartCount = 0; // Lalagyan ng puntos/clicks ng puso
-        const targetHearts = 50; // Target na kailangang ma-click
+        let heartCount = 0; 
+        const targetHearts = 50; 
         let audioCtx;
         let heartInterval;
 
@@ -300,10 +341,10 @@
             
             document.getElementById('box-screen').style.display = 'none';
             document.getElementById('surprise-screen').style.display = 'block';
-            document.getElementById('counter-container').style.display = 'block'; // Ipakita ang counter
+            document.getElementById('counter-container').style.display = 'block';
 
             showSlides(slideIndex);
-            heartInterval = setInterval(createHeart, 300); // Simulan ang ulan ng puso
+            heartInterval = setInterval(createHeart, 300); 
         }
 
         // Slideshow controls
@@ -335,13 +376,11 @@
                 popLoveText(e);
                 heart.remove();
                 
-                // Dagdagan ang score kapag na-click ang puso
                 heartCount++;
                 document.getElementById('heart-count').innerText = heartCount;
                 
-                // Kapag naabot ang 50 hearts, i-unlock ang video!
                 if (heartCount === targetHearts) {
-                    triggerVideoUnlock();
+                    triggerUnlockPopup();
                 }
             });
             
@@ -362,20 +401,25 @@
             setTimeout(() => { pop.remove(); }, 800);
         }
 
-        // FUNCTION PARA I-UNLOCK ANG VIDEO
-        function triggerVideoUnlock() {
-            clearInterval(heartInterval); // Itigil muna ang ulan ng puso para hindi mag-lag ang video
+        // Ipakita ang "Buksan ang regalo" popup pagkatapos maka-50
+        function triggerUnlockPopup() {
+            clearInterval(heartInterval); 
             
-            // Itago ang letter screen at counter
             document.getElementById('surprise-screen').style.display = 'none';
             document.getElementById('counter-container').style.display = 'none';
+            document.getElementById('unlock-screen').style.display = 'block'; // Papasok ang popup screen
             
-            // Ipakita ang video greeting screen!
-            document.getElementById('video-screen').style.display = 'block';
-            
-            // Tanggalin ang natitirang mga puso sa screen
             const remainingHearts = document.querySelectorAll('.heart');
             remainingHearts.forEach(h => h.remove());
+        }
+
+        // Dito natin ise-secure ang autoplay. Pagka-click sa button, mag-play agad ang video!
+        function playVideoSurprise() {
+            document.getElementById('unlock-screen').style.display = 'none';
+            document.getElementById('video-screen').style.display = 'block';
+            
+            const video = document.getElementById('myLoveVideo');
+            video.play(); // Gagana ito nang walang bawas sa tunog dahil galing sa pinindot na button!
         }
     </script>
 
