@@ -148,6 +148,101 @@
         }
         .active, .dot:hover { background-color: #d63384; }
 
+        /* --- ✉️ SOBRE NA MAY PAKPAK (FLYING ENVELOPE WITH WINGS) --- */
+        .flying-envelope {
+            position: fixed;
+            font-size: 40px;
+            bottom: -60px;
+            z-index: 110;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            animation: flyUp linear forwards;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            display: inline-block;
+        }
+
+        /* Kaliwang Pakpak */
+        .flying-envelope::before {
+            content: "🪶";
+            position: absolute;
+            left: -25px;
+            top: -5px;
+            font-size: 25px;
+            transform-origin: right bottom;
+            animation: flapLeft 0.3s ease-in-out infinite alternate;
+        }
+
+        /* Kanang Pakpak */
+        .flying-envelope::after {
+            content: "🪶";
+            position: absolute;
+            right: -25px;
+            top: -5px;
+            font-size: 25px;
+            transform: scaleX(-1); /* I-flip pabaligtad ang balahibo para maging kanang pakpak */
+            transform-origin: left bottom;
+            animation: flapRight 0.3s ease-in-out infinite alternate;
+        }
+
+        /* Animations para sa pagkampay ng pakpak */
+        @keyframes flapLeft {
+            0% { transform: rotate(-20deg); }
+            100% { transform: rotate(30deg); }
+        }
+        @keyframes flapRight {
+            0% { transform: scaleX(-1) rotate(-20deg); }
+            100% { transform: scaleX(-1) rotate(30deg); }
+        }
+
+        /* Animation para sa paglipad pataas */
+        @keyframes flyUp {
+            0% { transform: translateY(0) translateX(0) rotate(-5deg); opacity: 0.9; }
+            50% { transform: translateY(-50vh) translateX(40px) rotate(5deg); }
+            100% { transform: translateY(-120vh) translateX(-10px) rotate(-5deg); opacity: 0; }
+        }
+
+        /* --- 📜 POPUP SECRET MESSAGE FROM ENVELOPE --- */
+        #secret-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            width: 85%;
+            max-width: 400px;
+            background: #fffdf2; 
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 30px rgba(224, 206, 166, 0.3);
+            border: 2px solid #d4af37; 
+            z-index: 300;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #secret-popup.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        .close-popup-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.4);
+            z-index: 290;
+        }
+
         /* --- SCREEN 3: POPUP KAPAG NAKA-50 HEARTS --- */
         #unlock-screen {
             display: none;
@@ -245,7 +340,6 @@
 <body>
 
     <!-- 🎵 BACKGROUND MUSIC AUDIO ELEMENT -->
-    <!-- Palitan mo ang 'music.mp3' ng tamang file name ng kanta mo -->
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
@@ -292,6 +386,16 @@
         </div>
     </div>
 
+    <!-- 📜 INDEPENDENT POPUP MESSAGE OVERLAY & CARD -->
+    <div id="popup-overlay"></div>
+    <div id="secret-popup">
+        <h3 style="color: #d63384; margin-top:0; font-family: 'Georgia', serif;">💌 Secret Note para kay Elena:</h3>
+        <p style="color: #444; line-height: 1.6; font-style: italic; font-family: 'Georgia', serif;">
+            "Ang galing mo naman makahuli ng lumilipad na sobre, Love! Gusto ko lang sabihin na bawat segundo kasama ka, daig ko pa ang naka-jackpot sa lotto. I love you so much love ko! 🥰"
+        </p>
+        <button class="close-popup-btn" onclick="closeSecretMessage()">Ibalik sa Laro ❤️</button>
+    </div>
+
     <!-- SCREEN 3: ANG POPUP INTERMEDIATE SCREEN -->
     <div id="unlock-screen">
         <h2 style="color: #ff4d6d; margin-top: 0;">🎉 Quest Complete! 🎉</h2>
@@ -305,7 +409,6 @@
             <h1 style="color: #ff4d6d; margin-top: 0; font-size: 1.6rem;">To my elena 💕</h1>
             
             <div class="video-wrapper">
-                <!-- PAALALA: Palitan ang greeting.mp4 ng pangalan ng video mo sa GitHub -->
                 <video id="myLoveVideo" controls playsinline>
                     <source src="greeting.mp4" type="video/mp4">
                     Hindi suportado ng browser mo ang video tag.
@@ -322,6 +425,7 @@
         const targetHearts = 50; 
         let audioCtx;
         let heartInterval;
+        let envelopeInterval; 
 
         function playPopSound() {
             try {
@@ -343,9 +447,8 @@
         function openSurprise() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             
-            // 🎵 MAGLALARO ANG BACKGROUND MUSIC DITO
             const music = document.getElementById('bgMusic');
-            music.volume = 0.4; // Naka-set sa 40% ang lakas para marinig pa rin ang pop sound
+            music.volume = 0.4; 
             music.play().catch(e => console.log("Music play blocked", e));
 
             document.getElementById('box-screen').style.display = 'none';
@@ -354,9 +457,9 @@
 
             showSlides(slideIndex);
             heartInterval = setInterval(createHeart, 300); 
+            envelopeInterval = setInterval(createFlyingEnvelope, 5000); // Tuwing 5 segundo dadaan ang sobreng may pakpak
         }
 
-        // Slideshow controls
         function plusSlides(n) { showSlides(slideIndex += n); }
         function currentSlide(n) { showSlides(slideIndex = n); }
         function showSlides(n) {
@@ -394,8 +497,45 @@
             });
             
             document.body.appendChild(heart);
-            
             setTimeout(() => { heart.remove(); }, 5500);
+        }
+
+        // --- CODE PARA SA SOBRE NA MAY GUMAGALAW NA PAKPAK ---
+        function createFlyingEnvelope() {
+            if(document.getElementById('secret-popup').classList.contains('active') || heartCount >= targetHearts) return;
+
+            const envelope = document.createElement('div');
+            envelope.classList.add('flying-envelope');
+            envelope.innerText = '✉️'; // Mismong sobre na lang, ang pakpak ay galing sa CSS style (.flying-envelope::before/after)
+            
+            envelope.style.left = Math.random() * 70 + 15 + 'vw'; 
+            envelope.style.animationDuration = Math.random() * 2 + 5 + 's'; // Paglipad sa loob ng 5-7 segundo
+            
+            envelope.addEventListener('click', function() {
+                playPopSound();
+                openSecretMessage();
+                envelope.remove();
+            });
+
+            document.body.appendChild(envelope);
+            setTimeout(() => { envelope.remove(); }, 7500);
+        }
+
+        function openSecretMessage() {
+            document.getElementById('popup-overlay').style.display = 'block';
+            const popup = document.getElementById('secret-popup');
+            popup.style.display = 'block';
+            setTimeout(() => popup.classList.add('active'), 50);
+        }
+
+        function closeSecretMessage() {
+            playPopSound();
+            const popup = document.getElementById('secret-popup');
+            popup.classList.remove('active');
+            setTimeout(() => {
+                popup.style.display = 'none';
+                document.getElementById('popup-overlay').style.display = 'none';
+            }, 400);
         }
 
         function popLoveText(e) {
@@ -412,6 +552,7 @@
 
         function triggerUnlockPopup() {
             clearInterval(heartInterval); 
+            clearInterval(envelopeInterval); 
             
             document.getElementById('surprise-screen').style.display = 'none';
             document.getElementById('counter-container').style.display = 'none';
@@ -419,10 +560,11 @@
             
             const remainingHearts = document.querySelectorAll('.heart');
             remainingHearts.forEach(h => h.remove());
+            const remainingEnvelopes = document.querySelectorAll('.flying-envelope');
+            remainingEnvelopes.forEach(env => env.remove());
         }
 
         function playVideoSurprise() {
-            // 🎵 ITIGIL ANG BACKGROUND MUSIC BAGO MAG-PLAY ANG VIDEO GREETING
             const music = document.getElementById('bgMusic');
             music.pause();
 
