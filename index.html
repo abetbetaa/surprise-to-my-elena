@@ -63,7 +63,7 @@
             box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
             border: 2px solid #ffb6c1;
             position: relative;
-            z-index: 10; /* Para nasa ibabaw ng bumabagsak na puso ang letter */
+            z-index: 10; /* Ang letter ay nasa z-index 10 */
         }
         .love-letter h1 {
             color: #d63384;
@@ -86,13 +86,13 @@
             border: 3px solid #ffc0cb;
         }
 
-        /* Heart Rain Animation */
+        /* Bumabagsak na Puso sa HARAPAN (Foregound) */
         .heart {
             position: fixed;
             color: #ff4d6d;
             font-size: 20px;
-            top: -20px;
-            z-index: 5;
+            top: -30px;
+            z-index: 100; /* Ginawang 100 para mas mataas sa .love-letter na may z-index 10 */
             cursor: pointer;
             animation: fall linear forwards;
             user-select: none;
@@ -100,7 +100,7 @@
         }
         @keyframes fall {
             to {
-                transform: translateY(105vh) translateX(50px) rotate(360deg);
+                transform: translateY(110vh) translateX(50px) rotate(360deg);
             }
         }
 
@@ -109,15 +109,15 @@
             position: fixed;
             color: #d63384;
             font-weight: bold;
-            font-size: 1.2rem;
-            pointer-events: none; /* Para hindi harangan ang clicks */
-            z-index: 999;
+            font-size: 1.3rem;
+            pointer-events: none; /* Hindi haharang sa susunod na clicks */
+            z-index: 200; /* Pinaka-ibabaw sa lahat */
             animation: floatUp 0.8s ease-out forwards;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.9);
         }
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-50px) scale(1.3); }
+            100% { opacity: 0; transform: translateY(-60px) scale(1.4); }
         }
     </style>
 </head>
@@ -141,8 +141,8 @@
             <p>
                 Mahal kita ng sobra, pero sa kabila ng pag mamahal ko sayo, nag mamahal rin ang mga bilihin. ackkk!!. hayaan mo pag pwede ng gawing kanin ang buhangin at gawing ulam ang lupa. papakasal na tayo hahaha joke!
             </p>
-            <p style="font-size: 0.85rem; color: #aaa; margin-top: 20px;">
-                (Tip: Subukan mong pindutin ang mga bumabagsak na puso! 😉)
+            <p style="font-size: 0.85rem; color: #ff8fa3; margin-top: 20px; font-weight: bold;">
+                (Subukan mong tapikin o klikin 'yung mga bumabagsak na puso! 😉)
             </p>
         </div>
     </div>
@@ -152,7 +152,7 @@
             document.getElementById('box-screen').style.display = 'none';
             document.getElementById('surprise-screen').style.display = 'block';
 
-            // Bumabagsak na puso
+            // Simulan ang pagbagsak ng mga puso sa harapan
             setInterval(createHeart, 300);
         }
 
@@ -161,39 +161,40 @@
             heart.classList.add('heart');
             heart.innerText = '❤️';
             
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.fontSize = Math.random() * 20 + 20 + 'px'; // Medyo pinalaki para madaling ma-tap
+            // Random na pwesto, bilis ng animation, at laki ng puso
+            heart.style.left = Math.random() * 95 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2.5 + 's'; // 2.5s to 5.5s
+            heart.style.fontSize = Math.random() * 25 + 20 + 'px'; // Medyo pinalaki para madaling ma-touch sa mobile
             
-            // Kapag pinindot ang puso (gumagana sa click at touch)
+            // Touch/Click handler para sa puso
             heart.addEventListener('click', function(e) {
                 popLoveText(e);
-                heart.remove(); // Nawawala ang puso pagkapindot
+                heart.remove(); // Agad mawawala ang puso pagkapindot
             });
             
             document.body.appendChild(heart);
             
+            // Tanggalin ang puso kapag natapos na ang animation pababa
             setTimeout(() => {
                 heart.remove();
-            }, 5000);
+            }, 5500);
         }
 
-        // Function para sa lumulutang na text
         function popLoveText(e) {
-            const sweetTexts = ["I love you! 💖", "Mahal kita! 🥰", "Miss na kita! 🥺", "Ikaw lang; 👑", "Mwaaa! 💋"];
-            // Pumipili ng random na text sa listahan sa itaas
+            const sweetTexts = ["I love you! 💖", "Mahal kita! 🥰", "Miss na kita! 🥺", "Ikaw lang 👑", "Mwaaa! 💋", "Cute mo! 💕"];
             const randomText = sweetTexts[Math.floor(Math.random() * sweetTexts.length)];
 
             const pop = document.createElement('div');
             pop.classList.add('love-pop');
             pop.innerText = randomText;
             
-            // Ilalagay ang text kung saan eksaktong pinindot ng daliri/mouse
+            // Saan eksaktong tinap ang screen, doon lalabas ang text
             pop.style.left = e.clientX + 'px';
             pop.style.top = e.clientY + 'px';
             
             document.body.appendChild(pop);
             
+            // Matanggal ang text pagkatapos ng 0.8s
             setTimeout(() => {
                 pop.remove();
             }, 800);
