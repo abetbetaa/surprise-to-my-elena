@@ -454,7 +454,7 @@
             
             <h1>Happy Monthsary, Love! ❤️</h1>
             <p>Gusto ko lang ipaalala sa'yo kung gaano ka kahalaga sa akin. Salamat sa pag dala ng saya sa buhay ko at sa pagiging ikaw.</p>
-            <p>Mahal kita ng sobra, pero sa kabila ng pag mamahal ko sayo, nag mamahal rin ang mga bilihin. ackkk!!. hayaan mo pag pwede ng gawing kanin ang buhangin at gawing ulam ang lupa. papakasal na tayo hahaha joke!</p>
+            <p>Mahal kita ng sobra, pero sa kabila ng pag mamahal ko sayo, nag mamahal rinn ang mga bilihin. ackkk!!. hayaan mo pag pwede ng gawing kanin ang buhangin at gawing ulam ang lupa. papakasal na tayo hahaha joke!</p>
             
             <p style="font-size: 0.95rem; color: #ff4d6d; margin-top: 20px; font-weight: bold; background: #fff0f3; padding: 10px; border-radius: 10px;">
                 🚨 QUEST: Tapik ka ng 50 hearts love para makita mo yung nakatago hihi 😉
@@ -462,14 +462,14 @@
         </div>
     </div>
 
-    <!-- 🔒 NEW PASSWORD INTERFACE POPUP -->
+    <!-- 🔒 GENERAL PASSWORD INTERFACE POPUP -->
     <div id="popup-overlay"></div>
     <div id="password-popup">
-        <h3 style="color: #ff4d6d; margin: 0; font-size: 1.2rem;">🔒 Secured Envelope</h3>
-        <p style="color: #555; font-size: 0.95rem; margin-top: 5px;"> Oopss! password muna hihi 😁😁</p>
+        <h3 style="color: #ff4d6d; margin: 0; font-size: 1.2rem;" id="password-popup-title">🔒 Secured Envelope</h3>
+        <p style="color: #555; font-size: 0.95rem; margin-top: 5px;" id="password-popup-text">Kailangan ng tamang password para mabuksan ito, Love!</p>
         <p class="pass-hint" id="password-hint-text"></p>
         <input type="password" class="pass-input" id="env-password-field" placeholder="I-type ang password dito...">
-        <button class="pass-btn" onclick="checkEnvelopePassword()">Buksan ❤️</button>
+        <button class="pass-btn" id="password-submit-btn" onclick="checkEnvelopePassword()">Buksan ❤️</button>
     </div>
 
     <!-- 📜 MULTIMEDIA ENVELOPE POPUP CARD -->
@@ -484,7 +484,7 @@
     <div id="unlock-screen">
         <h2 style="color: #ff4d6d; margin-top: 0;">🎉 Quest Complete! 🎉</h2>
         <p style="color: #555; font-size: 1.1rem; line-height: 1.5;"> Goods, at dahil nakakuha ka ng 50 hearts. pindutin mo ang gift box 🎁</p>
-        <button class="unlock-btn" onclick="playVideoSurprise()"> Pindutin mo na akes! ❤️</button>
+        <button class="unlock-btn" onclick="askPasswordForVideo()"> Pindutin mo na akes! ❤️</button>
     </div>
 
     <!-- SCREEN 4: ANG VIDEO SCREEN -->
@@ -512,38 +512,36 @@
         let envelopeInterval; 
         let slideshowTimeout;
         
-        // Mga tracker para sa kasalukuyang binubuksang sobre
         let currentEnvelopeData = null;
 
-        // --- 📋 DYNAMIC ENVELOPE CONTENTS ARRAY WITH PASSWORDS ---
-        // Naka-set na sa "berlin" ang password ng lahat, Boss!
+        // --- 📋 DYNAMIC ENVELOPE CONTENTS ARRAY WITH PASWORDS & CLUES ---
         const secretEnvelopes = [
             {
                 type: "image",
                 url: "kangkong.jpg",
                 password: "berlin",
-                hint: "Clue: Pangalan ng motor natin",
+                hint: "Clue: pangalan ng tindahan natin 🏪✨",
                 letter: "Hello Love, Kamusta ka? Ilove you.thank po kasi kahit yan lang ang nabibigay ko sayo dika umaayaw sakin. atleast praktikal tayo diba? mas mahalaga ang kangkong kesa rose hihi 🥰 "
             },
             {
                 type: "video",
                 url: "swing.mp4",
                 password: "berlin",
-                hint: "Clue: Pangalan ng tindahan natin",
+                hint: "Clue: pangalan ng pusa natin 🐱🐾",
                 letter: "Ang buhay ko parang ikaw na nasa duduyan. mas masaya at may direksyon mula nung dumating ka para magbigay ng tulak at saya. salamat din sa bawat pag tulak sa akin pataas kapag mababa ang lipad ng mundo. 💖"
             },
             {
                 type: "video",
                 url: "pool.mp4",
                 password: "berlin",
-                hint: "Clue: Hulaan mo, pareho lang ang password sa unang sobre! 🤭",
+                hint: "Clue: pangalan ng motor natin 🛵💨",
                 letter: "Hello love, I love you po. muaw. Eatbulaga yarn? hakhak. kaylan ulit tayo mag swimming love pero hiking naman tayo appreciate natin kung gano kaganda ang likha ni Lord. 🌙✨"
             },
             {
                 type: "image",
                 url: "together.jpg",
                 password: "berlin",
-                hint: "Clue: Wala palang clue",
+                hint: "Clue: pangalan ng pusa, motor, o tindahan natin (iisa lang sagot) 🤫❤️",
                 letter: "I LOVE YOU :* MUAW ❤️"
             }
         ];
@@ -680,12 +678,17 @@
             setTimeout(() => { envelope.remove(); }, 7500);
         }
 
-        // 1. Unang step: Hihingi ng password
+        // --- 🔒 PASSWORD HANDLERS ---
+
         function askForPassword(envelopeElement) {
             currentEnvelopeData = secretEnvelopes[Math.floor(Math.random() * secretEnvelopes.length)];
             
+            document.getElementById('password-popup-title').innerText = "🔒 Secured Envelope";
+            document.getElementById('password-popup-text').innerText = "Kailangan ng tamang password para mabuksan ito, Love!";
             document.getElementById('password-hint-text').innerText = currentEnvelopeData.hint || "";
             document.getElementById('env-password-field').value = "";
+            
+            document.getElementById('password-submit-btn').setAttribute("onclick", "checkEnvelopePassword()");
             
             if(envelopeElement) envelopeElement.remove();
             
@@ -695,12 +698,10 @@
             setTimeout(() => passPopup.classList.add('active'), 50);
         }
 
-        // 2. Ikalawang step: I-verify ang tinype na password
         function checkEnvelopePassword() {
             const enteredPass = document.getElementById('env-password-field').value;
             
-            // Gagawin nitong lowercase ang sagot para kahit "Berlin" o "BERLIN" ay tanggapin pa rin
-            if(enteredPass.toLowerCase() === currentEnvelopeData.password) {
+            if(enteredPass.toLowerCase() === "berlin") {
                 playPopSound();
                 const passPopup = document.getElementById('password-popup');
                 passPopup.classList.remove('active');
@@ -712,7 +713,40 @@
             }
         }
 
-        // 3. Ikatlong step: Ipakita ang liham kapag tama ang password
+        function askPasswordForVideo() {
+            playPopSound();
+            document.getElementById('unlock-screen').style.display = 'none';
+
+            document.getElementById('password-popup-title').innerText = "👑 Final Grand Surprise Lock";
+            document.getElementById('password-popup-text').innerText = "Heto na ang huling harang, Love! I-type ang ultimate password natin para mapanood ang video.";
+            document.getElementById('password-hint-text').innerText = "Clue: Ano nga ulit yung pangalan ng tindahan, pusa, o motor natin? Isang salita lang yan... 😉🔑";
+            document.getElementById('env-password-field').value = "";
+            
+            document.getElementById('password-submit-btn').setAttribute("onclick", "checkVideoPassword()");
+            
+            document.getElementById('popup-overlay').style.display = 'block';
+            const passPopup = document.getElementById('password-popup');
+            passPopup.style.display = 'block';
+            setTimeout(() => passPopup.classList.add('active'), 50);
+        }
+
+        function checkVideoPassword() {
+            const enteredPass = document.getElementById('env-password-field').value;
+            
+            if(enteredPass.toLowerCase() === "berlin") {
+                playPopSound();
+                const passPopup = document.getElementById('password-popup');
+                passPopup.classList.remove('active');
+                passPopup.style.display = 'none';
+                document.getElementById('popup-overlay').style.display = 'none';
+                
+                playVideoSurprise(); 
+            } else {
+                alert("Hala mali pa rin! Yung sagot mo sa mga lumilipad na sobre kanina, yun din yon love! Subukan mo ulit dali... 😋❌");
+            }
+        }
+
+        // --- 📜 MESSAGE VIEWER ---
         function openSecretMessage(randomData) {
             const mediaBox = document.getElementById('popup-media-box');
             mediaBox.innerHTML = ""; 
@@ -732,8 +766,6 @@
                 vid.playsInline = true;
                 mediaBox.appendChild(vid);
                 document.getElementById('bgMusic').volume = 0.1;
-            } else if(randomData.type === "text") {
-                mediaBox.style.display = 'none'; 
             }
 
             document.getElementById('popup-message-text').innerHTML = `"${randomData.letter}"`;
