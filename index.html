@@ -205,7 +205,60 @@
             100% { transform: translateY(-120vh) translateX(-10px) rotate(-5deg); opacity: 0; }
         }
 
-        /* --- 📜 NEW DIGITAL SCRAPBOOK POPUP --- */
+        /* --- 🔒 PASSWORD PROMPT POPUP --- */
+        #password-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            width: 85%;
+            max-width: 350px;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border: 3px solid #ff4d6d;
+            z-index: 310;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        #password-popup.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        .pass-input {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 2px solid #ffb6c1;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+        }
+        .pass-input:focus {
+            border-color: #ff4d6d;
+        }
+        .pass-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .pass-hint {
+            font-size: 0.85rem;
+            color: #777;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* --- 📜 MULTIMEDIA ENVELOPE POPUP CARD --- */
         #secret-popup {
             display: none;
             position: fixed;
@@ -229,7 +282,6 @@
             opacity: 1;
         }
         
-        /* Media Container para sa loob ng Sobre */
         .popup-media-container {
             width: 100%;
             height: 200px;
@@ -260,7 +312,6 @@
             margin-top: 15px;
             transition: background 0.2s;
         }
-        .close-popup-btn:hover { background: #d63384; }
 
         #popup-overlay {
             display: none;
@@ -390,7 +441,7 @@
                 <div class="mySlides"><img src="https://scontent.fmnl3-1.fna.fbcdn.net/v/t39.30808-6/615469057_2299310233908973_1150415293070689111_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGADxJ29kcEjItXliACM8To1ab4rpTxiL_VpviulPGIvxa8VSelrTHe3_3yhwhtj9VE6gbwq-M1nVOkrFk2eTuG&_nc_ohc=gOLk5opj-kcQ7kNvwEtLccv&_nc_oc=AdpOq_wEVgFxSKldnTyhlp3buw6htecNfI1qlDk75XZKNgpfh7C_qfnSlvPYMRFzOx0&_nc_zt=23&_nc_ht=scontent.fmnl3-1.fna&_nc_gid=pei9LL0G7e07K_9sxYQiwg&_nc_ss=7b2a8&oh=00_AQDhKkUkJ_0YVREQROb7bj84k8g_sqPDvosqLZpV2m98vA&oe=6A5FF67A" alt="Tayo 2"></div>
                 <div class="mySlides"><img src="https://scontent.fmnl3-4.fna.fbcdn.net/v/t39.30808-6/605692887_2287965191710144_2505694390836038961_n.jpg?stp=dst-jpg_tt6&cstp=mx1296x1728&ctp=s1296x1728&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGS2g-Al1FbBHNdwXyF39XY2L3c9Rw-fjPYvdz1HD5-M6z6I0Sv6uW2xRKJGE1WvY9YmoDY6m9hxc-gW-UYlz1d&_nc_ohc=TOi1fpvUtkwQ7kNvwHyWbry&_nc_oc=AdqYRI3uplA7eEqBk2MlS4wFxQEqkSIo1c41f1_Bh9kpMCggYHcf45iolFjQIx9T2zc&_nc_zt=23&_nc_ht=scontent.fmnl3-4.fna&_nc_gid=ootQyjprjtLKe5hQw9VRjg&_nc_ss=7b2a8&oh=00_AQBmeUcwuEFvnbENRXijH20wD64ds5OiNr07ctyur4OCnA&oe=6A5FC986" alt="Tayo 3"></div>
                 <div class="mySlides"><img src="https://scontent.fmnl37-1.fna.fbcdn.net/v/t39.30808-6/500073879_2093829281123737_8164147672547399528_n.jpg?stp=dst-jpg_tt6&cstp=mx736x1000&ctp=s736x1000&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHIAzEFu5qfFa9MXhjLshnV0A-pfNTWtqvQD6l81Na2q3wbHXeNUM0KIOu4joOd8CskcfD_H5irjvk2Z3gYdY0N&_nc_ohc=y7VPX1VHUU4Q7kNvwHk7bSY&_nc_oc=AdrBocLHjAkl_1e1vPaxljjbRFhD5iCh4nQSAibSlBaPzZEnURmWTQAYLMR4hzg6ASY&_nc_zt=23&_nc_ht=scontent.fmnl37-1.fna&_nc_gid=bYJcUrj80Y1RJYdrS0t8Kw&_nc_ss=7b2a8&oh=00_AQD_IOPeeW-IzXcAneFnB0kn2QcJ1bnHKVkQOks_ugHeEA&oe=6A5FF415" alt="Tayo 4"></div>
-                <div class="mySlides"><img src="https://scontent.fmnl3-3.fna.fbcdn.net/v/t39.30808-6/492560974_2069673523539313_613949877520675021_n.jpg?stp=dst-jpg_tt6&cstp=mx1518x2048&ctp=s1518x2048&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHRLNMs4pHuVS8A_HG0o2wcbBzb6-EAS3lsHNvr4QBLeZE5RwPunMtDgUbdOcvd4io3rRqQ6cdlWN3JV8ZsfxXe&_nc_ohc=uHTEHjtTUfAQ7kNvwEcbtX6&_nc_oc=Adr5K_ANcvrGi6QL7_98sk_zR66VEybEFnfzgmTp06wE8ZIpI8XCW7yLds-N12s1Axg&_nc_zt=23&_nc_ht=scontent.fmnl3-3.fna&_nc_gid=ePtWRTN85kNwHDXV-t90cw&_nc_ss=7b2a8&oh=00_AQAFA_PenIUkC6iWgB5blQs-NY78jPQyWlO1rMYvnj32iQ&oe=6A5FE478" alt="Tayo 5"></div>
+                <div class="mySlides"><img src="https://scontent.fmnl3-3.fna.fbcdn.net/v/t39.30808-6/492560974_2069673523539313_613949877520675021_n.jpg?stp=dst-jpg_tt6&cstp=mx1518x2048&ctp=s1518x2048&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHRLNMs4pHuVS8A_HG0o2wcbBzb6-EAS3lsHNvr4QBLeZE5RwPunMtDgUbdOcvd4io3rRqQ6cdlWN3JV8ZsfxXe&_nc_ohc=uHTEHjtTUfAQ7kNvwEcbtX6&_nc_oc=Adr5K_ANcvrGi6QL7_98sk_zR66VEybEFnfzgmTp06wE8ZIpI8XCW7yLds-N12s1Axg&_nc_zt=23&_nc_ht=scontent.fmnl3-3.fna&_nc_gid=ePtWRTN85kNwHDXV-t90cw&_nc_ss=7b2a8&oh=00_AQAFA_PenIUkC6iWgB5blQs-NY78jPQyWlO1rMYvn;2iQ&oe=6A5FE478" alt="Tayo 5"></div>
             </div>
 
             <div class="dot-container">
@@ -411,15 +462,21 @@
         </div>
     </div>
 
-    <!-- 📜 UPDATED MULTIMEDIA ENVELOPE POPUP CARD -->
+    <!-- 🔒 NEW PASSWORD INTERFACE POPUP -->
     <div id="popup-overlay"></div>
+    <div id="password-popup">
+        <h3 style="color: #ff4d6d; margin: 0; font-size: 1.2rem;">🔒 Secured Envelope</h3>
+        <p style="color: #555; font-size: 0.95rem; margin-top: 5px;">Kailangan ng tamang password para mabuksan ito, Love!</p>
+        <p class="pass-hint" id="password-hint-text"></p>
+        <input type="password" class="pass-input" id="env-password-field" placeholder="I-type ang password dito...">
+        <button class="pass-btn" onclick="checkEnvelopePassword()">Buksan ❤️</button>
+    </div>
+
+    <!-- 📜 MULTIMEDIA ENVELOPE POPUP CARD -->
     <div id="secret-popup">
-        <!-- Dito papasok dynamic image or video gamit ang JS -->
         <div class="popup-media-container" id="popup-media-box"></div>
-        
         <h3 style="color: #d63384; margin-top:5px; font-family: 'Georgia', serif;">💌 Liham Mula sa Sobre:</h3>
         <p id="popup-message-text" style="color: #444; line-height: 1.5; font-style: italic; font-family: 'Georgia', serif; font-size: 0.95rem; max-height: 120px; overflow-y: auto; padding: 0 5px;"></p>
-        
         <button class="close-popup-btn" onclick="closeSecretMessage()"> BACK 🔙 ❤️</button>
     </div>
 
@@ -454,28 +511,39 @@
         let heartInterval;
         let envelopeInterval; 
         let slideshowTimeout;
+        
+        // Mga tracker para sa kasalukuyang binubuksang sobre
+        let currentEnvelopeData = null;
 
-        // --- 📋 DYNAMIC ENVELOPE CONTENTS ARRAY ---
-        //  file names o web links ( 'photo or .mp4')
+        // --- 📋 DYNAMIC ENVELOPE CONTENTS ARRAY WITH PASSWORDS ---
+        // Naka-set na sa "berlin" ang password ng lahat, Boss!
         const secretEnvelopes = [
             {
                 type: "image",
-                url: "kangkong.jpg", // kangkong
+                url: "kangkong.jpg",
+                password: "berlin",
+                hint: "Clue: Ang paborito mong lungsod o tawag sa akin? (all lowercase) 🇩🇪",
                 letter: "Hello Love, Kamusta ka? Ilove you.thank po kasi kahit yan lang ang nabibigay ko sayo dika umaayaw sakin. atleast praktikal tayo diba? mas mahalaga ang kangkong kesa rose hihi 🥰 "
             },
             {
                 type: "video",
-                url: "swing.mp4", // swing
+                url: "swing.mp4",
+                password: "berlin",
+                hint: "Clue: Isang sikat na lugar sa Europe (all lowercase) 🗺️",
                 letter: "Ang buhay ko parang ikaw na nasa duduyan. mas masaya at may direksyon mula nung dumating ka para magbigay ng tulak at saya. salamat din sa bawat pag tulak sa akin pataas kapag mababa ang lipad ng mundo. 💖"
             },
             {
-                type: "video", //pool
-                url: "pool.mp4", 
+                type: "video",
+                url: "pool.mp4",
+                password: "berlin",
+                hint: "Clue: Hulaan mo, pareho lang ang password sa unang sobre! 🤭",
                 letter: "Hello love, I love you po. muaw. Eatbulaga yarn? hakhak. kaylan ulit tayo mag swimming love pero hiking naman tayo appreciate natin kung gano kaganda ang likha ni Lord. 🌙✨"
             },
             {
                 type: "image",
-                url: "together.jpg", 
+                url: "together.jpg",
+                password: "berlin",
+                hint: "Clue: Character din ito sa Money Heist! 💰🎭",
                 letter: "I LOVE YOU :* MUAW ❤️"
             }
         ];
@@ -592,7 +660,9 @@
         }
 
         function createFlyingEnvelope() {
-            if(document.getElementById('secret-popup').classList.contains('active') || heartCount >= targetHearts) return;
+            if(document.getElementById('secret-popup').classList.contains('active') || 
+               document.getElementById('password-popup').classList.contains('active') || 
+               heartCount >= targetHearts) return;
 
             const envelope = document.createElement('div');
             envelope.classList.add('flying-envelope');
@@ -603,47 +673,71 @@
             
             envelope.addEventListener('click', function() {
                 playPopSound();
-                openSecretMessage();
-                envelope.remove();
+                askForPassword(envelope);
             });
 
             document.body.appendChild(envelope);
             setTimeout(() => { envelope.remove(); }, 7500);
         }
 
-        function openSecretMessage() {
-            // Humugot ng random envelope entry mula sa listahan
-            const randomData = secretEnvelopes[Math.floor(Math.random() * secretEnvelopes.length)];
+        // 1. Unang step: Hihingi ng password
+        function askForPassword(envelopeElement) {
+            currentEnvelopeData = secretEnvelopes[Math.floor(Math.random() * secretEnvelopes.length)];
             
+            document.getElementById('password-hint-text').innerText = currentEnvelopeData.hint || "";
+            document.getElementById('env-password-field').value = "";
+            
+            if(envelopeElement) envelopeElement.remove();
+            
+            document.getElementById('popup-overlay').style.display = 'block';
+            const passPopup = document.getElementById('password-popup');
+            passPopup.style.display = 'block';
+            setTimeout(() => passPopup.classList.add('active'), 50);
+        }
+
+        // 2. Ikalawang step: I-verify ang tinype na password
+        function checkEnvelopePassword() {
+            const enteredPass = document.getElementById('env-password-field').value;
+            
+            // Gagawin nitong lowercase ang sagot para kahit "Berlin" o "BERLIN" ay tanggapin pa rin
+            if(enteredPass.toLowerCase() === currentEnvelopeData.password) {
+                playPopSound();
+                const passPopup = document.getElementById('password-popup');
+                passPopup.classList.remove('active');
+                passPopup.style.display = 'none';
+                
+                openSecretMessage(currentEnvelopeData);
+            } else {
+                alert("Mali ang password, Love! Isip ka pa ng ibang clue dali... 🤭❌");
+            }
+        }
+
+        // 3. Ikatlong step: Ipakita ang liham kapag tama ang password
+        function openSecretMessage(randomData) {
             const mediaBox = document.getElementById('popup-media-box');
-            mediaBox.innerHTML = ""; // Linisin muna ang lumang media
+            mediaBox.innerHTML = ""; 
             
-            // Suriin kung image o video ang kailangang i-render
             if(randomData.type === "image") {
                 mediaBox.style.display = 'flex';
                 const img = document.createElement('img');
                 img.src = randomData.url;
                 mediaBox.appendChild(img);
             } else if(randomData.type === "video") {
+                mediaBox.style.display = 'flex';
                 const vid = document.createElement('video');
                 vid.src = randomData.url;
                 vid.controls = true;
                 vid.autoplay = true;
-                vid.muted = true; // Safe para sa mobile browsers
+                vid.muted = true; 
                 vid.playsInline = true;
                 mediaBox.appendChild(vid);
                 document.getElementById('bgMusic').volume = 0.1;
-                // Hinaan ang bg music kapag may nagpe-play na video sa loob ng sobre
-                document.getElementById('bgMusic').volume = 0.1;
             } else if(randomData.type === "text") {
-                mediaBox.style.display = 'none'; // Itago ang media box kung text lang
+                mediaBox.style.display = 'none'; 
             }
 
-            // I-inject ang liham text
             document.getElementById('popup-message-text').innerHTML = `"${randomData.letter}"`;
 
-            // Ipakita ang screen overlay at popup card
-            document.getElementById('popup-overlay').style.display = 'block';
             const popup = document.getElementById('secret-popup');
             popup.style.display = 'block';
             setTimeout(() => popup.classList.add('active'), 50);
@@ -652,14 +746,12 @@
         function closeSecretMessage() {
             playPopSound();
             
-            // Siguraduhing mai-stop ang kahit anong video sa loob ng media container bago isara
             const mediaBox = document.getElementById('popup-media-box');
             const videoElement = mediaBox.querySelector('video');
             if(videoElement) {
                 videoElement.pause();
             }
             
-            // Ibalik sa normal volume ang bg music
             document.getElementById('bgMusic').volume = 0.4;
 
             const popup = document.getElementById('secret-popup');
@@ -689,6 +781,11 @@
             
             document.getElementById('surprise-screen').style.display = 'none';
             document.getElementById('counter-container').style.display = 'none';
+            
+            document.getElementById('password-popup').style.display = 'none';
+            document.getElementById('secret-popup').style.display = 'none';
+            document.getElementById('popup-overlay').style.display = 'none';
+            
             document.getElementById('unlock-screen').style.display = 'block'; 
             
             const remainingHearts = document.querySelectorAll('.heart');
